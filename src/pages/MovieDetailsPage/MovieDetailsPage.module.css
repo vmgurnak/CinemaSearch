@@ -1,0 +1,123 @@
+.MovieWrap {
+  padding: 20px 15px;
+}
+
+.MovieInfoSection {
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid var(--dark-grey);
+}
+
+.GoBackWrap {
+  position: relative;
+  max-width: 100px;
+  margin-bottom: 10px;
+  background-color: var(--grey);
+  border: 1px solid var(--dark-grey);
+  border-radius: 3px;
+}
+
+.GoBackLink {
+  padding: 5px 10px 5px 30px;
+  color: var(--dark-blue);
+}
+
+.GoBackIcon {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  color: var(--dark-blue);
+}
+
+.MovieInfoWrap {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .MovieInfoWrap {
+    flex-direction: row;
+    gap: 30px;
+  }
+}
+
+.MovieImgWrap {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .MovieImgWrap {
+    flex-basis: 400px;
+  }
+}
+
+.MovieImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.MovieContWrap {
+  padding: 20px 10px 20px 0;
+}
+
+@media (min-width: 768px) {
+  .MovieContWrap {
+    width: calc(100% - 430px);
+  }
+}
+
+.MovieTitle {
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+.MovieCont {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.MovieCont:nth-child(5) {
+  margin-bottom: 25px;
+}
+
+.MovieContTitle {
+  font-weight: 700;
+}
+
+.OverviewTitle {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.OverviewCont {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.AddInfoSection {
+  border-bottom: 1.5px solid var(--dark-grey);
+}
+
+.AddInfoWrap {
+  padding: 25px 10px 20px 10px;
+}
+
+.AddInfoTitle {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.AddInfoList {
+  padding-left: 40px;
+  list-style-type: disc;
+}
+
+.AddInfoItem:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.AddInfoLink {
+  color: var(--dark-blue);
+  text-decoration: underline var(--dark-blue);
+}
