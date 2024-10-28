@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 import { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
 // import react icons
@@ -62,11 +64,11 @@ const MovieDetailsPage = () => {
                 <h2 className={css.MovieTitle}>{movieData.title}</h2>
                 <p className={css.MovieCont}>
                   <span className={css.MovieContTitle}>Release Date: </span>
-                  {movieData.release_date}
+                  {format(new Date(movieData.release_date), 'dd MMMM yyyy')}
                 </p>
                 <p className={css.MovieCont}>
                   <span className={css.MovieContTitle}>Revenue: </span>
-                  {movieData.revenue} $
+                  {new Intl.NumberFormat('en-US').format(movieData.revenue)} $
                 </p>
                 <p className={css.MovieCont}>
                   <span className={css.MovieContTitle}>User Score: </span>
