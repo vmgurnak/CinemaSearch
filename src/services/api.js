@@ -6,7 +6,7 @@ const API_KEY =
 // Trending
 // Get a list of trending movies on TMDB.
 //https://api.themoviedb.org/3/trending/movie/{time_window}
-export const requestMovie = async (currentPage) => {
+export const requestTrendingMovie = async (currentPage) => {
   const BASE_URL = 'https://api.themoviedb.org/3/trending/movie/day';
 
   const config = {
@@ -63,6 +63,21 @@ export const requestPopularMovie = async (currentPage) => {
 // Upcoming
 // Get a list of movies that are being released soon.
 // https://api.themoviedb.org/3/movie/upcoming
+export const requestUpcomingMovie = async (currentPage) => {
+  const BASE_URL = 'https://api.themoviedb.org/3/movie/upcoming';
+  const config = {
+    params: {
+      language: 'en-US',
+      page: currentPage,
+    },
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  const { data } = await axios.get(`${BASE_URL}`, config);
+  return data;
+};
 
 // Search
 // Search for movies by their original, translated and alternative titles.

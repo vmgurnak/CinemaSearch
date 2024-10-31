@@ -4,11 +4,11 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import MovieList from '../../components/MovieList/MovieList';
 import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn';
 
-import { requestMovie } from '../../services/api';
+import { requestTrendingMovie } from '../../services/api';
 
-import css from './HomePage.module.css';
+import css from './TrendingPage.module.css';
 
-const HomePage = () => {
+const TrendingPage = () => {
   const [movieList, setMovieList] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoadMoreBtn, setIsLoadMoreBtn] = useState(false);
@@ -18,7 +18,7 @@ const HomePage = () => {
     async function fetchData() {
       try {
         setIsError(false);
-        const data = await requestMovie(currentPage);
+        const data = await requestTrendingMovie(currentPage);
         console.log(data);
         setMovieList((prevMovies) => [...prevMovies, ...data.results]);
         setIsLoadMoreBtn(data.total_pages && data.total_pages !== currentPage);
@@ -47,4 +47,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default TrendingPage;

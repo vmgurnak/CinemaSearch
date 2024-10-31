@@ -1,28 +1,41 @@
 import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 
-const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
-const MoviesPage = lazy(() => import('./pages/MoviesPage/MoviesPage'));
+const TrendingPage = lazy(() =>
+  import('./pages/TrendingPage/TrendingPage.jsx')
+);
+const TopMoviesPage = lazy(() => import('./pages/TopMoviesPage/TopMoviesPage'));
 const PopularMoviesPage = lazy(() =>
   import('./pages/PopularMoviesPage/PopularMoviesPage')
 );
+const UpcomingMoviesPage = lazy(() =>
+  import('./pages/UpcomingMoviesPage/UpcomingMoviesPage')
+);
+
+const MoviesPage = lazy(() => import('./pages/MoviesPage/MoviesPage'));
+
 const MovieDetailsPage = lazy(() =>
   import('./pages/MovieDetailsPage/MovieDetailsPage')
 );
 
-import TopMoviesPage from './pages/TopMoviesPage/TopMoviesPage';
+const FavoritesPage = lazy(() =>
+  import('./pages/FavoritesPage/FavoritesPage.jsx')
+);
+
 import Layout from './components/Layout/Layout.jsx';
 
 function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/topmovies" element={<TopMoviesPage />} />
-        <Route path="/popularmovies" element={<PopularMoviesPage />} />
-        <Route path="/movies" element={<MoviesPage />} />
+        <Route path="/trending" element={<TrendingPage />} />
+        <Route path="/toprated" element={<TopMoviesPage />} />
+        <Route path="/popular" element={<PopularMoviesPage />} />
+        <Route path="/upcoming" element={<UpcomingMoviesPage />} />
+        <Route path="/search" element={<MoviesPage />} />
         <Route path="/movies/:movieId/*" element={<MovieDetailsPage />} />
-        <Route path="*" element={<HomePage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="*" element={<TrendingPage />} />
       </Routes>
     </Layout>
   );
