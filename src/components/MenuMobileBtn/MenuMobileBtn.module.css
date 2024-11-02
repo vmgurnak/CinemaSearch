@@ -1,0 +1,9 @@
+.btnMenu {
+  padding: 15px 0;
+}
+
+.iconMenu {
+  height: 35px;
+  width: 35px;
+  color: var(--light-gray);
+}

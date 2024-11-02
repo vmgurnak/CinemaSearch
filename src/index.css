@@ -75,8 +75,8 @@ img {
   --dark: #1b1b1b;
 
   /* Transition*/
-  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  --animation-duration: 250ms;
+  --transition: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-delay: 250ms;
 }
 
 /* ------------BASE STYLES------------ */
