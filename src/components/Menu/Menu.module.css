@@ -22,9 +22,13 @@
 }
 
 .link {
-  padding: 20px 0px;
+  padding: 5px 0px;
   color: var(--light-gray);
   transition: color var(--transition-delay) var(--transition);
+
+  @media (min-width: 768px) {
+    padding: 20px 0px;
+  }
 }
 
 .link:nth-child(4) {

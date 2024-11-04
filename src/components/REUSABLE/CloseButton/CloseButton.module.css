@@ -1,8 +1,4 @@
 .btnClose {
-  position: absolute;
-  top: 18px;
-  right: 30px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,23 +6,22 @@
   width: 36px;
   height: 36px;
 
-  border: 1px solid var(--gray);
+  border: 2px solid var(--light-gray);
   border-radius: 50%;
+  color: var(--light-gray);
 
   transition: color var(--transition-delay) var(--transition),
-    background-color var(--transition-delay) var(--transition),
-    border var(--transition-delay) var(--transition);
+    background-color var(--transition-delay) var(--transition);
 }
 
 .btnClose:hover,
 .btnClose:focus {
-  color: var(--white);
-  background-color: var(--dark-gray);
-  border: 1px solid var(--dark-gray);
+  color: var(--dark-grey);
+  background-color: var(--light-gray);
 }
 
 .iconBtnClose {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
+  width: 20px;
+  height: 20px;
+  color: inherit;
 }

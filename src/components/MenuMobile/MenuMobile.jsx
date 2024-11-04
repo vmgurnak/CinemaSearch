@@ -10,7 +10,7 @@ const MenuMobile = ({ closeMenu, isOpenMenu }) => {
   return (
     <div className={clsx(css.menuMobile, isOpenMenu && css.menuMobileOpen)}>
       <Logo addClass={css.logoLink} onClick={closeMenu} />
-      <CloseButton onClose={closeMenu} />
+      <CloseButton addClass={css.btnClose} onClose={closeMenu} />
       <Menu closeMenu={closeMenu} />
     </div>
   );

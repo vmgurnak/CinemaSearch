@@ -8,6 +8,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  overflow-y: auto;
 
   padding: 40px 35px;
   z-index: 999;
@@ -29,6 +30,12 @@
 
 .logoLink {
   position: absolute;
-  top: 28px;
-  left: 30px;
+  top: 23px;
+  left: 25px;
+}
+
+.btnClose {
+  position: absolute;
+  top: 25px;
+  right: 25px;
 }
