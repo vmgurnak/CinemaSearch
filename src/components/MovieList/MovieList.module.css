@@ -1,14 +1,19 @@
 .MovieList {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   row-gap: 30px;
   column-gap: 15px;
-  justify-content: center;
+  justify-content: center; */
+
+  display: grid;
+  row-gap: 30px;
+  column-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
 .MovieItem {
-  width: 320px;
-  padding: 8px 8px 17px;
+  /* width: 320px; */
+  padding: 10px;
   border-radius: 8px;
 
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
@@ -16,13 +21,17 @@
 
   transition: box-shadow 250ms linear;
 
-  @media (min-width: 768px) {
+  /* @media (min-width: 375px) {
     width: 235px;
-  }
+  } */
 
-  @media (min-width: 1440px) {
+  /* @media (min-width: 768px) {
+    width: 235px;
+  } */
+
+  /* @media (min-width: 1440px) {
     width: 330px;
-  }
+  } */
 }
 
 .MovieItem:hover {
@@ -56,16 +65,33 @@
 }
 
 .MovieInfo {
-  display: flex;
   padding: 20px 10px 10px 10px;
-  /* gap: 10px; */
-  /* align-items: center; */
+  font-size: 12px;
+}
+
+.MovieTitleWrap {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .MovieTitle {
-  margin-right: 10px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.MovieYear {
+}
+
+.MovieGenresWrap {
+  display: flex;
+  justify-content: space-between;
+  color: var(--orange);
+}
+
+.MovieGenres {
 }
 
 .MovieRating {
-  margin-right: auto;
+  font-size: 12px;
 }

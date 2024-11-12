@@ -151,3 +151,21 @@ export const requestMovieByReviews = async (id) => {
   const { data } = await axios.get(`${BASE_URL}${id}/reviews`, config);
   return data;
 };
+
+// Genres
+// https://api.themoviedb.org/3/genre/movie/list
+// Get the list of genres.
+export const requestGenres = async () => {
+  const BASE_URL = 'https://api.themoviedb.org/3/genre/movie/list';
+  const config = {
+    params: {
+      language: 'en-US',
+    },
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  const { data } = await axios.get(`${BASE_URL}`, config);
+  return data;
+};

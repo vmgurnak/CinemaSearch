@@ -13,16 +13,32 @@ import MovieList from '../../components/MovieList/MovieList';
 import SearchForm from '../../components/SearchForm/SearchForm';
 
 // import function request from api https://api.unsplash.com
-import { requestMovieByQuery } from '../../services/api';
+import { requestGenres, requestMovieByQuery } from '../../services/api';
 
 import css from './MoviesPage.module.css';
 
 const MoviesPage = () => {
   const [movieList, setMovieList] = useState(null);
+  const [genres, setGenres] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('query');
+
+  useEffect(() => {
+    async function fetchGenres() {
+      try {
+        setIsError(false);
+        const dataGenres = await requestGenres();
+        console.log(dataGenres);
+        setGenres(dataGenres.genres);
+      } catch (err) {
+        setIsError(true);
+        setGenres([]);
+      }
+    }
+    fetchGenres();
+  }, []);
 
   useEffect(() => {
     if (searchQuery === null) {
@@ -74,7 +90,7 @@ const MoviesPage = () => {
       {isError && <ErrorMessage />}
       {isLoading && <Loader />}
       {Array.isArray(movieList) && movieList.length > 0 && (
-        <MovieList movieList={movieList} />
+        <MovieList movieList={movieList} genres={genres} />
       )}
       <Toaster
         position="top-right"
