@@ -15,7 +15,8 @@ const Logo = ({ addClass, onClick }) => {
       onClick={onClick}
     >
       <ImFilm className={css.logo} />
-      {width >= 1440 && <span className={css.logoText}>Filmoteka</span>}
+      {width < 768 && <span className={css.logoText}>Filmoteka</span>}
+      {width >= 900 && <span className={css.logoText}>Filmoteka</span>}
     </Link>
   );
 };

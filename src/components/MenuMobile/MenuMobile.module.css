@@ -18,9 +18,9 @@
   transform: translateX(-100%);
   transition: transform var(--transition-delay) ease-in-out;
 
-  @media (min-width: 375px) {
+  /* @media (min-width: 375px) {
     width: 375px;
-  }
+  } */
 }
 
 .menuMobileOpen {
@@ -36,6 +36,6 @@
 
 .btnClose {
   position: absolute;
-  top: 25px;
+  top: 32px;
   right: 25px;
 }

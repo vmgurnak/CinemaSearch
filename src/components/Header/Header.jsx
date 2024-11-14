@@ -7,6 +7,8 @@ import Menu from '../Menu/Menu.jsx';
 import Logo from '../REUSABLE/Logo/Logo.jsx';
 
 import css from './Header.module.css';
+import MainMenu from '../MainMenu/MainMenu.jsx';
+import AddMenu from '../AddMenu/AddMenu.jsx';
 
 const Header = () => {
   const { width } = useWindowSize();
@@ -30,7 +32,11 @@ const Header = () => {
             <MenuMobileBtn openMenu={openMenu} />
           </>
         ) : (
-          <Menu />
+          <>
+            {/* <Menu /> */}
+            <MainMenu />
+            <AddMenu />
+          </>
         )}
       </div>
     </header>
