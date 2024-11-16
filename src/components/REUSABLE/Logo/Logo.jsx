@@ -9,11 +9,7 @@ const Logo = ({ addClass, onClick }) => {
   // const { width } = useWindowSize();
 
   return (
-    <Link
-      className={clsx(css.logoWrap, addClass)}
-      to="/trending"
-      onClick={onClick}
-    >
+    <Link className={clsx(css.logoWrap, addClass)} to="/" onClick={onClick}>
       <ImFilm className={css.logo} />
       <span className={css.logoText}>Filmoteka</span>
       {/* {width < 768 && <span className={css.logoText}>Filmoteka</span>} */}

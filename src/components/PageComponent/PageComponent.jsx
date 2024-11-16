@@ -7,11 +7,13 @@ import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn';
 import { requestGenres } from '../../services/api';
 
 import css from './PageComponent.module.css';
+import Loader from '../Loader/Loader.jsx';
 
 const PageComponent = ({ requestMovie, titlePage }) => {
   const [movieList, setMovieList] = useState([]);
   const [genres, setGenres] = useState([]);
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoadMoreBtn, setIsLoadMoreBtn] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -34,12 +36,15 @@ const PageComponent = ({ requestMovie, titlePage }) => {
     async function fetchData() {
       try {
         setIsError(false);
+        setIsLoading(true);
         const data = await requestMovie(currentPage);
         setMovieList((prevMovies) => [...prevMovies, ...data.results]);
         setIsLoadMoreBtn(data.total_pages && data.total_pages !== currentPage);
       } catch (err) {
         setIsError(true);
         setMovieList([]);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -61,6 +66,7 @@ const PageComponent = ({ requestMovie, titlePage }) => {
           addClass={css.movieList}
         />
       )}
+      {isLoading && <Loader />}
       {isLoadMoreBtn && <LoadMoreBtn onSetPage={onSetPage} />}
     </div>
   );

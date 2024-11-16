@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 import MenuMobile from '../MenuMobile/MenuMobile.jsx';
 import MenuMobileBtn from '../MenuMobileBtn/MenuMobileBtn.jsx';
-import Menu from '../Menu/Menu.jsx';
 import Logo from '../REUSABLE/Logo/Logo.jsx';
 
 import css from './Header.module.css';

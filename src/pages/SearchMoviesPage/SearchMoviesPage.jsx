@@ -1,27 +1,25 @@
-// import toast library for notification when the form is empty
 import toast, { Toaster } from 'react-hot-toast';
-// import library Formik
 
-// import huks
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-// import components
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Loader from '../../components/Loader/Loader';
 import MovieList from '../../components/MovieList/MovieList';
 import SearchForm from '../../components/SearchForm/SearchForm';
 
-// import function request from api https://api.unsplash.com
 import { requestGenres, requestMovieByQuery } from '../../services/api';
 
-import css from './MoviesPage.module.css';
+import css from './SearchMoviesPage.module.css';
+import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn.jsx';
 
-const MoviesPage = () => {
-  const [movieList, setMovieList] = useState(null);
+const SearchMoviesPage = () => {
+  const [movieList, setMovieList] = useState([]);
   const [genres, setGenres] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isLoadMoreBtn, setIsLoadMoreBtn] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('query');
 
@@ -51,7 +49,8 @@ const MoviesPage = () => {
       try {
         setIsError(false);
         setIsLoading(true);
-        const data = await requestMovieByQuery(searchQuery);
+        const data = await requestMovieByQuery(currentPage, searchQuery);
+        console.log(data);
         if (data.results.length === 0) {
           toast(
             'Sorry, there are no movies your search query. Please try again.'
@@ -59,8 +58,10 @@ const MoviesPage = () => {
           setMovieList([]);
           return;
         } else {
-          setMovieList(data.results);
+          // setMovieList(data.results);
+          setMovieList((prevMovies) => [...prevMovies, ...data.results]);
         }
+        setIsLoadMoreBtn(data.total_pages && data.total_pages !== currentPage);
       } catch (err) {
         setIsError(true);
         setMovieList([]);
@@ -70,7 +71,11 @@ const MoviesPage = () => {
     }
 
     fetchDataByQuery();
-  }, [searchQuery]);
+  }, [searchQuery, currentPage]);
+
+  const onSetPage = () => {
+    setCurrentPage((prevState) => prevState + 1);
+  };
 
   // callback function for handlerSubmit SearchForm
   const onSetSearchParams = (query) => {
@@ -83,6 +88,7 @@ const MoviesPage = () => {
 
   return (
     <div className={css.MoviesPageWrap}>
+      <h2 className={css.pageTitle}>Find your favorite movie</h2>
       <SearchForm
         onSetSearchParams={onSetSearchParams}
         searchQuery={searchQuery}
@@ -90,8 +96,9 @@ const MoviesPage = () => {
       {isError && <ErrorMessage />}
       {isLoading && <Loader />}
       {Array.isArray(movieList) && movieList.length > 0 && (
-        <MovieList movieList={movieList} genres={genres} />
+        <MovieList movieList={movieList} genres={genres} addClass={css.movieList} />
       )}
+      {isLoadMoreBtn && <LoadMoreBtn onSetPage={onSetPage} />}
       <Toaster
         position="top-right"
         toastOptions={{
@@ -106,4 +113,4 @@ const MoviesPage = () => {
   );
 };
 
-export default MoviesPage;
+export default SearchMoviesPage;

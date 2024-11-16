@@ -9,7 +9,7 @@ const buildLinkClass = ({ isActive }) => {
 const MainMenu = ({ closeMenu }) => {
   return (
     <nav className={css.menuList}>
-      <NavLink className={buildLinkClass} to="/trending" onClick={closeMenu}>
+      <NavLink className={buildLinkClass} to="/" onClick={closeMenu}>
         TRENDING
       </NavLink>
       <NavLink className={buildLinkClass} to="/toprated" onClick={closeMenu}>

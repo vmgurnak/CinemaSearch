@@ -82,12 +82,13 @@ export const requestUpcomingMovie = async (currentPage) => {
 // Search
 // Search for movies by their original, translated and alternative titles.
 // https://api.themoviedb.org/3/search/movie
-export const requestMovieByQuery = async (query) => {
+export const requestMovieByQuery = async (currentPage, query) => {
   const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
   const config = {
     params: {
       language: 'en-US',
       query,
+      page: currentPage,
     },
     headers: {
       Authorization: `Bearer ${API_KEY}`,

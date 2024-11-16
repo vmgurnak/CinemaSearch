@@ -3,8 +3,18 @@
 
 .loadMoreBtn {
   margin: 0 auto;
-  padding: 10px 30px;
-  border-radius: 3px;
-  background-color: #404bbf;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 500;
+  /* background-color: #404bbf; */
+  background-color: var(--orange);
   color: #fff;
+
+  transition: background-color var(--transition-delay) var(--transition);
+}
+
+.loadMoreBtn:hover,
+.loadMoreBtn:focus {
+  background-color: var(--dark-orange);
 }

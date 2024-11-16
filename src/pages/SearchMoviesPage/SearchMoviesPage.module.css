@@ -1,0 +1,28 @@
+.MoviesPageWrap {
+  padding: 20px 15px;
+}
+
+.pageTitle {
+  font-size: 24px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: var(--orange);
+
+  @media (min-width: 375px) {
+    font-size: 28px;
+  }
+
+  @media (min-width: 768px) {
+    margin-bottom: 20px;
+    font-size: 36px;
+  }
+
+  @media (min-width: 1440px) {
+    margin-bottom: 30px;
+    font-size: 48px;
+  }
+}
+
+.movieList {
+  margin-bottom: 20px;
+}

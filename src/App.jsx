@@ -12,7 +12,9 @@ const UpcomingMoviesPage = lazy(() =>
   import('./pages/UpcomingMoviesPage/UpcomingMoviesPage')
 );
 
-const MoviesPage = lazy(() => import('./pages/MoviesPage/MoviesPage'));
+const SearchMoviesPage = lazy(() =>
+  import('./pages/SearchMoviesPage/SearchMoviesPage.jsx')
+);
 
 const MovieDetailsPage = lazy(() =>
   import('./pages/MovieDetailsPage/MovieDetailsPage')
@@ -28,11 +30,11 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/trending" element={<TrendingPage />} />
+        <Route path="/" element={<TrendingPage />} />
         <Route path="/toprated" element={<TopMoviesPage />} />
         <Route path="/popular" element={<PopularMoviesPage />} />
         <Route path="/upcoming" element={<UpcomingMoviesPage />} />
-        <Route path="/search" element={<MoviesPage />} />
+        <Route path="/search" element={<SearchMoviesPage />} />
         <Route path="/movies/:movieId/*" element={<MovieDetailsPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="*" element={<TrendingPage />} />

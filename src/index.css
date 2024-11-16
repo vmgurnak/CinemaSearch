@@ -74,6 +74,7 @@ img {
   --red: #e44848;
   --dark: #1b1b1b;
   --orange: #ff6b01;
+  --dark-orange: #d75e08;
 
   /* Transition*/
   --transition: cubic-bezier(0.4, 0, 0.2, 1);

@@ -31,6 +31,7 @@ const MovieDetailsPage = () => {
       try {
         setIsError(false);
         const data = await requestMovieById(movieId);
+        console.log(data);
         setMovieData(data);
       } catch (err) {
         setIsError(true);
@@ -66,10 +67,12 @@ const MovieDetailsPage = () => {
                   <span className={css.MovieContTitle}>Release Date: </span>
                   {format(new Date(movieData.release_date), 'dd MMMM yyyy')}
                 </p>
-                <p className={css.MovieCont}>
-                  <span className={css.MovieContTitle}>Revenue: </span>
-                  {new Intl.NumberFormat('en-US').format(movieData.revenue)} $
-                </p>
+                {movieData.revenue !== 0 && (
+                  <p className={css.MovieCont}>
+                    <span className={css.MovieContTitle}>Revenue: </span>
+                    {new Intl.NumberFormat('en-US').format(movieData.revenue)} $
+                  </p>
+                )}
                 <p className={css.MovieCont}>
                   <span className={css.MovieContTitle}>User Score: </span>
                   {movieData.vote_average.toFixed(1)}

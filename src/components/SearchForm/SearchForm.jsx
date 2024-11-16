@@ -8,14 +8,15 @@ import css from './SearchForm.module.css';
 
 const SearchForm = ({ onSetSearchParams, searchQuery }) => {
   const initialValues = { query: searchQuery ?? '' };
+  // const initialValues = { query: '' };
 
-  const handlerSubmit = (values, actions) => {
+  const handlerSubmit = (values) => {
     if (!values.query.trim()) {
       toast('Please enter your request.');
       return;
     }
     onSetSearchParams(values.query);
-    //  actions.resetForm();
+    values.query = '';
   };
 
   return (
