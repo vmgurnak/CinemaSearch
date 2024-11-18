@@ -11,7 +11,7 @@ import SearchForm from '../../components/SearchForm/SearchForm';
 import { requestGenres, requestMovieByQuery } from '../../services/api';
 
 import css from './SearchMoviesPage.module.css';
-import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn.jsx';
+import Button from '../../components/Button/Button.jsx';
 
 const SearchMoviesPage = () => {
   const [movieList, setMovieList] = useState([]);
@@ -73,7 +73,7 @@ const SearchMoviesPage = () => {
     fetchDataByQuery();
   }, [searchQuery, currentPage]);
 
-  const onSetPage = () => {
+  const handleClick = () => {
     setCurrentPage((prevState) => prevState + 1);
   };
 
@@ -96,9 +96,13 @@ const SearchMoviesPage = () => {
       {isError && <ErrorMessage />}
       {isLoading && <Loader />}
       {Array.isArray(movieList) && movieList.length > 0 && (
-        <MovieList movieList={movieList} genres={genres} addClass={css.movieList} />
+        <MovieList
+          movieList={movieList}
+          genres={genres}
+          addClass={css.movieList}
+        />
       )}
-      {isLoadMoreBtn && <LoadMoreBtn onSetPage={onSetPage} />}
+      {isLoadMoreBtn && <Button handleClick={handleClick} title="Load more" />}
       <Toaster
         position="top-right"
         toastOptions={{

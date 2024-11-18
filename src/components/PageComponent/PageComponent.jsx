@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import MovieList from '../../components/MovieList/MovieList';
-import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn';
+import Button from '../Button/Button.jsx';
 
 import { requestGenres } from '../../services/api';
 
@@ -51,7 +51,7 @@ const PageComponent = ({ requestMovie, titlePage }) => {
     fetchData();
   }, [currentPage, requestMovie]);
 
-  const onSetPage = () => {
+  const handleClick = () => {
     setCurrentPage((prevState) => prevState + 1);
   };
 
@@ -67,7 +67,7 @@ const PageComponent = ({ requestMovie, titlePage }) => {
         />
       )}
       {isLoading && <Loader />}
-      {isLoadMoreBtn && <LoadMoreBtn onSetPage={onSetPage} />}
+      {isLoadMoreBtn && <Button handleClick={handleClick} title="Load more" />}
     </div>
   );
 };

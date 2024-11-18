@@ -2,11 +2,12 @@ import { format } from 'date-fns';
 
 import { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
-// import react icons
+
 import { FaArrowLeftLong } from 'react-icons/fa6';
 
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Loader from '../../components/Loader/Loader';
+import Button from '../../components/Button/Button.jsx';
 
 const MovieCast = lazy(() => import('../../components/MovieCast/MovieCast'));
 const MovieReviews = lazy(() =>
@@ -14,16 +15,27 @@ const MovieReviews = lazy(() =>
 );
 
 import { requestMovieById } from '../../services/api';
+import { timeConversion } from '../../services/timeConversion';
 
 import css from './MovieDetailsPage.module.css';
+import Modal from '../../components/Modal/Modal.jsx';
 
 const MovieDetailsPage = () => {
   // Get the movie ID from the URL parameter.
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
   const backLinkRef = useRef(location.state ?? '/movies');
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     if (!movieId) return;
@@ -42,7 +54,7 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   return (
-    <div className={css.MovieWrap}>
+    <div className={css.pageWrap}>
       <section className={css.MovieInfoSection}>
         {isError && <ErrorMessage />}
         {movieData !== null && (
@@ -81,9 +93,14 @@ const MovieDetailsPage = () => {
                   <span className={css.MovieContTitle}>Genres: </span>
                   {movieData.genres.map(({ name }) => name).join(' ')}
                 </p>
+                <p className={css.MovieCont}>
+                  <span className={css.MovieContTitle}>Duration: </span>
+                  {timeConversion(movieData.runtime)}
+                </p>
 
                 <h3 className={css.OverviewTitle}>Overview</h3>
                 <p className={css.OverviewCont}>{movieData.overview}</p>
+                <Button handleClick={handleOpenModal} title="Watch Trailer" />
               </div>
             </div>
           </div>
@@ -105,7 +122,6 @@ const MovieDetailsPage = () => {
             </li>
           </ul>
         </div>
-        <div className={css.AddInfoCont}></div>
       </section>
       <section>
         <Suspense fallback={<Loader />}>
@@ -115,6 +131,7 @@ const MovieDetailsPage = () => {
           </Routes>
         </Suspense>
       </section>
+      {isModalOpen && <Modal onClose={handleCloseModal} movieId={movieId} />}
     </div>
   );
 };

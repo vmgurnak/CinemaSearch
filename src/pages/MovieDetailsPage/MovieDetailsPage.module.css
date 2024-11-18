@@ -1,5 +1,16 @@
-.MovieWrap {
-  padding: 20px 15px;
+.pageWrap {
+  margin: 0 auto;
+  padding: 15px 10px;
+
+  background-color: var(light-gray);
+
+  @media (min-width: 768px) {
+    padding: 20px 15px;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 30px 40px;
+  }
 }
 
 .MovieInfoSection {
@@ -91,8 +102,12 @@
 }
 
 .OverviewCont {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   line-height: 1.5;
+
+  @media (min-width: 768px) {
+    margin-bottom: 60px;
+  }
 }
 
 .AddInfoSection {
