@@ -134,14 +134,14 @@ const MovieDetailsPage = () => {
           </Routes>
         </Suspense>
       </section>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <Modal onClose={handleCloseModal} isModalOpen={isModalOpen}>
           <ModalTrailer movieId={movieId} />
         </Modal>
-      )}
-      {/* <Modal onClose={handleCloseModal} isModalOpen={isModalOpen}>
+      )} */}
+      <Modal onClose={handleCloseModal} isModalOpen={isModalOpen}>
         <ModalTrailer movieId={movieId} />
-      </Modal> */}
+      </Modal>
     </div>
   );
 };
