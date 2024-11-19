@@ -8,6 +8,7 @@ import { FaArrowLeftLong } from 'react-icons/fa6';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/Button/Button.jsx';
+import ModalTrailer from '../../components/ModalTrailer/ModalTrailer.jsx';
 
 const MovieCast = lazy(() => import('../../components/MovieCast/MovieCast'));
 const MovieReviews = lazy(() =>
@@ -21,7 +22,6 @@ import css from './MovieDetailsPage.module.css';
 import Modal from '../../components/Modal/Modal.jsx';
 
 const MovieDetailsPage = () => {
-  // Get the movie ID from the URL parameter.
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +34,10 @@ const MovieDetailsPage = () => {
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, 500);
+    // setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -131,7 +134,14 @@ const MovieDetailsPage = () => {
           </Routes>
         </Suspense>
       </section>
-      {isModalOpen && <Modal onClose={handleCloseModal} movieId={movieId} />}
+      {isModalOpen && (
+        <Modal onClose={handleCloseModal} isModalOpen={isModalOpen}>
+          <ModalTrailer movieId={movieId} />
+        </Modal>
+      )}
+      {/* <Modal onClose={handleCloseModal} isModalOpen={isModalOpen}>
+        <ModalTrailer movieId={movieId} />
+      </Modal> */}
     </div>
   );
 };

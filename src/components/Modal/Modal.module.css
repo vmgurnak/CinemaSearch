@@ -7,15 +7,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   /* backdrop-filter: blur(1px); */
+
+  opacity: 0;
+  transform: scale(1.5);
+  pointer-events: none;
+  transition: opacity 500ms var(--transition), transform 500ms var(--transition);
+}
+
+.modalOverlay.modalOpen {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
 
 .modal {
   position: relative;
   width: 80%;
   height: 80%;
-  /* background-color: var(--dark-grey); */
   background-color: #fff;
   border-radius: 10px;
   padding: 30px;

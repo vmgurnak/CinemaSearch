@@ -153,6 +153,24 @@ export const requestMovieByReviews = async (id) => {
   return data;
 };
 
+// Trailer
+// https://api.themoviedb.org/3/movie/{movie_id}/videos
+
+export const requestMovieByTrailer = async (id) => {
+  const BASE_URL = 'https://api.themoviedb.org/3/movie/';
+  const config = {
+    params: {
+      language: 'en-US',
+    },
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  const { data } = await axios.get(`${BASE_URL}${id}/videos`, config);
+  return data;
+};
+
 // Genres
 // https://api.themoviedb.org/3/genre/movie/list
 // Get the list of genres.
