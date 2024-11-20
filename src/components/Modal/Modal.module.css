@@ -16,19 +16,25 @@
   transition: opacity 500ms var(--transition), transform 500ms var(--transition);
 }
 
-.modalOverlay.modalOpen {
+.modalOverlay.afterOpen {
   opacity: 1;
   transform: scale(1);
   pointer-events: auto;
 }
 
+.modalOverlay.beforeClose {
+  opacity: 0;
+  transform: scale(1.5);
+  pointer-events: none;
+}
+
 .modal {
   position: relative;
-  width: 80%;
-  height: 80%;
-  background-color: #fff;
+  width: 85%;
+  height: 85%;
+  background-color: var(--light-gray);
   border-radius: 10px;
-  padding: 30px;
+  padding: 20px;
 }
 
 .btnClose {

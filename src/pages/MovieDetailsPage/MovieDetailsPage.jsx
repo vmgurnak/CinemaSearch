@@ -25,19 +25,26 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [afterOpen, setAfterOpen] = useState(false);
+  const [beforeClose, setBeforeClose] = useState(false);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
   const backLinkRef = useRef(location.state ?? '/movies');
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
+    setTimeout(() => {
+      setAfterOpen(true);
+    }, 500);
   };
 
   const handleCloseModal = () => {
+    setBeforeClose(true);
+    setAfterOpen(false);
     setTimeout(() => {
       setIsModalOpen(false);
+      setBeforeClose(false);
     }, 500);
-    // setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -134,14 +141,19 @@ const MovieDetailsPage = () => {
           </Routes>
         </Suspense>
       </section>
-      {/* {isModalOpen && (
-        <Modal onClose={handleCloseModal} isModalOpen={isModalOpen}>
-          <ModalTrailer movieId={movieId} />
+      {isModalOpen && (
+        <Modal
+          onClose={handleCloseModal}
+          isModalOpen={isModalOpen}
+          afterOpen={afterOpen}
+          beforeClose={beforeClose}
+        >
+          <ModalTrailer movieId={movieId} poster={movieData.poster_path} />
         </Modal>
-      )} */}
-      <Modal onClose={handleCloseModal} isModalOpen={isModalOpen}>
+      )}
+      {/* <Modal onClose={handleCloseModal} isModalOpen={isModalOpen} afterOpen={afterOpen} beforeClose={beforeClose}>
         <ModalTrailer movieId={movieId} />
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

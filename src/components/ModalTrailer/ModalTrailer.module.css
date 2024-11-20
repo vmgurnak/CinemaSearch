@@ -4,5 +4,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: aqua; */
+  flex-direction: column;
+  background-color: var(--light-gray);
+}
+
+.errorMessageText {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--orange);
+}
+
+.MovieImg {
+  display: block;
+  height: 100%;
+  object-fit: cover;
 }

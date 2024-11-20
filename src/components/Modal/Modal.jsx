@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import CloseButton from '../REUSABLE/CloseButton/CloseButton.jsx';
 
 import css from './Modal.module.css';
 
-const Modal = ({ isModalOpen, onClose, children }) => {
+const Modal = ({ isModalOpen, afterOpen, beforeClose, onClose, children }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === 'Escape') {
@@ -27,7 +27,12 @@ const Modal = ({ isModalOpen, onClose, children }) => {
 
   return (
     <div
-      className={clsx(css.modalOverlay, isModalOpen && css.modalOpen)}
+      className={clsx(
+        css.modalOverlay,
+        isModalOpen && css.modalOpen,
+        afterOpen && css.afterOpen,
+        beforeClose && css.beforeClose
+      )}
       onClick={handleBackdropClick}
     >
       <div className={css.modal}>
