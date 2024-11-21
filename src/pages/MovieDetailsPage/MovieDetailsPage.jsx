@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
 
 import { FaArrowLeftLong } from 'react-icons/fa6';
+import { MdFavoriteBorder } from 'react-icons/md';
 
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Loader from '../../components/Loader/Loader';
@@ -20,6 +21,7 @@ import { timeConversion } from '../../services/timeConversion';
 
 import css from './MovieDetailsPage.module.css';
 import Modal from '../../components/Modal/Modal.jsx';
+import clsx from 'clsx';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -27,9 +29,26 @@ const MovieDetailsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [afterOpen, setAfterOpen] = useState(false);
   const [beforeClose, setBeforeClose] = useState(false);
+
   const [isError, setIsError] = useState(false);
   const location = useLocation();
   const backLinkRef = useRef(location.state ?? '/movies');
+  const [isFavorite, setIsFavorite] = useState(() => {
+    const savedMovies = window.localStorage.getItem('favoriteMovies');
+    if (savedMovies) {
+      return JSON.parse(savedMovies).some(
+        (movie) => movie.id === Number(movieId)
+      );
+    }
+    return false;
+  });
+  const [favoriteMovies, setFavoriteMovies] = useState(() => {
+    const savedMovies = window.localStorage.getItem('favoriteMovies');
+    if (savedMovies) {
+      return JSON.parse(savedMovies);
+    }
+    return [];
+  });
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -45,6 +64,25 @@ const MovieDetailsPage = () => {
       setIsModalOpen(false);
       setBeforeClose(false);
     }, 500);
+  };
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      'favoriteMovies',
+      JSON.stringify(favoriteMovies)
+    );
+  }, [favoriteMovies]);
+
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
+
+    if (isFavorite) {
+      setFavoriteMovies((prevMovies) =>
+        prevMovies.filter((movie) => movie.id !== Number(movieId))
+      );
+    } else {
+      setFavoriteMovies((prevMovies) => [...prevMovies, movieData]);
+    }
   };
 
   useEffect(() => {
@@ -84,7 +122,16 @@ const MovieDetailsPage = () => {
                 />
               </div>
               <div className={css.MovieContWrap}>
-                <h2 className={css.MovieTitle}>{movieData.title}</h2>
+                <div className={css.MovieTitleWrap}>
+                  <h2 className={css.MovieTitle}>{movieData.title}</h2>
+                  <MdFavoriteBorder
+                    className={clsx(
+                      css.iconFavorite,
+                      isFavorite && css.iconFavoriteActive
+                    )}
+                    onClick={handleFavorite}
+                  />
+                </div>
                 <p className={css.MovieCont}>
                   <span className={css.MovieContTitle}>Release Date: </span>
                   {format(new Date(movieData.release_date), 'dd MMMM yyyy')}

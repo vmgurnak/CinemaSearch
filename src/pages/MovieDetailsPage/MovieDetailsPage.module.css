@@ -79,9 +79,25 @@
   }
 }
 
-.MovieTitle {
+.MovieTitleWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 25px;
+}
+
+.MovieTitle {
   font-size: 28px;
+}
+
+.iconFavorite {
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+}
+
+.iconFavorite.iconFavoriteActive {
+  color: var(--red);
 }
 
 .MovieCont {

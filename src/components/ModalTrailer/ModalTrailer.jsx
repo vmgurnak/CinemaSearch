@@ -40,6 +40,7 @@ const ModalTrailer = ({ poster }) => {
             trailers && trailers.length > 0 ? trailers[0].key : ''
           }`}
           title="YouTube video player"
+          frameBorder="0"
           allowFullScreen
         />
       ) : (

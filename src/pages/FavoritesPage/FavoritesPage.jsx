@@ -1,7 +1,14 @@
-import css from './FavoritesPage.module.css';
+import { requestTrendingMovie } from '../../services/api';
+
+import PageComponentFavorites from '../../components/PageComponent/PageComponent.jsx';
 
 const FavoritesPage = () => {
-  return <div>LibraryPage</div>;
+  return (
+    <PageComponentFavorites
+      requestMovie={requestTrendingMovie}
+      titlePage="Favorites movies"
+    />
+  );
 };
 
 export default FavoritesPage;
