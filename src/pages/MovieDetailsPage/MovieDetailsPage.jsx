@@ -1,20 +1,14 @@
 import { format } from 'date-fns';
 
-import { useEffect, useState, useRef, Suspense, lazy } from 'react';
-import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
 
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { MdFavoriteBorder } from 'react-icons/md';
 
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import Loader from '../../components/Loader/Loader';
 import Button from '../../components/Button/Button.jsx';
 import ModalTrailer from '../../components/ModalTrailer/ModalTrailer.jsx';
-
-const MovieCast = lazy(() => import('../../components/MovieCast/MovieCast'));
-const MovieReviews = lazy(() =>
-  import('../../components/MovieReviews/MovieReviews')
-);
 
 import { requestMovieById } from '../../services/api';
 import { timeConversion } from '../../services/timeConversion';
@@ -103,91 +97,91 @@ const MovieDetailsPage = () => {
 
   return (
     <div className={css.pageWrap}>
-      <section className={css.MovieInfoSection}>
-        {isError && <ErrorMessage />}
-        {movieData !== null && (
-          <div>
-            <div className={css.GoBackWrap}>
-              <Link className={css.GoBackLink} to={backLinkRef.current}>
-                Go back
-              </Link>
-              <FaArrowLeftLong className={css.GoBackIcon} size="16" />
-            </div>
-            <div className={css.MovieInfoWrap}>
-              <div className={css.MovieImgWrap}>
-                <img
-                  className={css.MovieImg}
-                  src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}
-                  alt=""
-                />
+      {movieData !== null && (
+        <>
+          <section className={css.MovieInfoSection}>
+            {isError && <ErrorMessage />}
+            <div>
+              <div className={css.GoBackWrap}>
+                <Link className={css.GoBackLink} to={backLinkRef.current}>
+                  Go back
+                </Link>
+                <FaArrowLeftLong className={css.GoBackIcon} size="16" />
               </div>
-              <div className={css.MovieContWrap}>
-                <div className={css.MovieTitleWrap}>
-                  <h2 className={css.MovieTitle}>{movieData.title}</h2>
-                  <MdFavoriteBorder
-                    className={clsx(
-                      css.iconFavorite,
-                      isFavorite && css.iconFavoriteActive
-                    )}
-                    onClick={handleFavorite}
+              <div className={css.MovieInfoWrap}>
+                <div className={css.MovieImgWrap}>
+                  <img
+                    className={css.MovieImg}
+                    src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}
+                    alt=""
                   />
                 </div>
-                <p className={css.MovieCont}>
-                  <span className={css.MovieContTitle}>Release Date: </span>
-                  {format(new Date(movieData.release_date), 'dd MMMM yyyy')}
-                </p>
-                {movieData.revenue !== 0 && (
+                <div className={css.MovieContWrap}>
+                  <div className={css.MovieTitleWrap}>
+                    <h2 className={css.MovieTitle}>{movieData.title}</h2>
+                    <MdFavoriteBorder
+                      className={clsx(
+                        css.iconFavorite,
+                        isFavorite && css.iconFavoriteActive
+                      )}
+                      onClick={handleFavorite}
+                    />
+                  </div>
                   <p className={css.MovieCont}>
-                    <span className={css.MovieContTitle}>Revenue: </span>
-                    {new Intl.NumberFormat('en-US').format(movieData.revenue)} $
+                    <span className={css.MovieContTitle}>Release Date: </span>
+                    {format(new Date(movieData.release_date), 'dd MMMM yyyy')}
                   </p>
-                )}
-                <p className={css.MovieCont}>
-                  <span className={css.MovieContTitle}>User Score: </span>
-                  {movieData.vote_average.toFixed(1)}
-                </p>
-                <p className={css.MovieCont}>
-                  <span className={css.MovieContTitle}>Genres: </span>
-                  {movieData.genres.map(({ name }) => name).join(' ')}
-                </p>
-                <p className={css.MovieCont}>
-                  <span className={css.MovieContTitle}>Duration: </span>
-                  {timeConversion(movieData.runtime)}
-                </p>
+                  {movieData.revenue !== 0 && (
+                    <p className={css.MovieCont}>
+                      <span className={css.MovieContTitle}>Revenue: </span>
+                      {new Intl.NumberFormat('en-US').format(
+                        movieData.revenue
+                      )}{' '}
+                      $
+                    </p>
+                  )}
+                  <p className={css.MovieCont}>
+                    <span className={css.MovieContTitle}>User Score: </span>
+                    {movieData.vote_average.toFixed(1)}
+                  </p>
+                  <p className={css.MovieCont}>
+                    <span className={css.MovieContTitle}>Genres: </span>
+                    {movieData.genres.map(({ name }) => name).join(' ')}
+                  </p>
+                  <p className={css.MovieCont}>
+                    <span className={css.MovieContTitle}>Duration: </span>
+                    {timeConversion(movieData.runtime)}
+                  </p>
 
-                <h3 className={css.OverviewTitle}>Overview</h3>
-                <p className={css.OverviewCont}>{movieData.overview}</p>
-                <Button handleClick={handleOpenModal} title="Watch Trailer" />
+                  <h3 className={css.OverviewTitle}>Overview</h3>
+                  <p className={css.OverviewCont}>{movieData.overview}</p>
+                  <Button handleClick={handleOpenModal} title="Watch Trailer" />
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </section>
-      <section className={css.AddInfoSection}>
-        <div className={css.AddInfoWrap}>
-          <h4 className={css.AddInfoTitle}>Additional information</h4>
-          <ul className={css.AddInfoList}>
-            <li className={css.AddInfoItem}>
-              <Link to="cast" className={css.AddInfoLink}>
-                Cast
-              </Link>
-            </li>
-            <li className={css.AddInfoItem}>
-              <Link to="reviews" className={css.AddInfoLink}>
-                Reviews
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="cast" element={<MovieCast />} />
-            <Route path="reviews" element={<MovieReviews />} />
-          </Routes>
-        </Suspense>
-      </section>
+          </section>
+          <section className={css.AddInfoSection}>
+            <div className={css.AddInfoWrap}>
+              <h4 className={css.AddInfoTitle}>Additional information</h4>
+              <ul className={css.AddInfoList}>
+                <li className={css.AddInfoItem}>
+                  <Link to="cast" className={css.AddInfoLink}>
+                    Cast
+                  </Link>
+                </li>
+                <li className={css.AddInfoItem}>
+                  <Link to="reviews" className={css.AddInfoLink}>
+                    Reviews
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </section>
+          <section>
+            <Outlet />
+          </section>{' '}
+        </>
+      )}
       {isModalOpen && (
         <Modal
           onClose={handleCloseModal}
@@ -198,9 +192,6 @@ const MovieDetailsPage = () => {
           <ModalTrailer movieId={movieId} poster={movieData.poster_path} />
         </Modal>
       )}
-      {/* <Modal onClose={handleCloseModal} isModalOpen={isModalOpen} afterOpen={afterOpen} beforeClose={beforeClose}>
-        <ModalTrailer movieId={movieId} />
-      </Modal> */}
     </div>
   );
 };

@@ -1,14 +1,7 @@
-import { requestTrendingMovie } from '../../services/api';
-
-import PageComponentFavorites from '../../components/PageComponent/PageComponent.jsx';
+import PageComponentFavorites from '../../components/PageComponentFavorites/PageComponentFavorites';
 
 const FavoritesPage = () => {
-  return (
-    <PageComponentFavorites
-      requestMovie={requestTrendingMovie}
-      titlePage="Favorites movies"
-    />
-  );
+  return <PageComponentFavorites titlePage="Favorites movies" />;
 };
 
 export default FavoritesPage;

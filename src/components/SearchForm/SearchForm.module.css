@@ -1,6 +1,7 @@
 .MoviesPageForm {
   margin: 0 auto;
   display: flex;
+  gap: 3px;
   max-width: 350px;
   margin-bottom: 20px;
 }
@@ -9,21 +10,25 @@
   display: block;
   width: 100%;
   padding: 5px 10px;
-  border-width: 1px;
+  border-width: 2px;
   border-style: solid;
-  border-color: var(--dark-grey);
-  border-radius: 3px;
+  border-color: var(--ligth-dark);
+  border-radius: 5px;
   outline: none;
 }
 
 .MoviesPageInput:focus {
-  border-color: var(--ligth-blue);
+  border-color: var(--dark-blue);
   border-width: 2px;
 }
 
 .MoviesPageBtn {
-  padding: 5px 10px;
-  border-radius: 3px;
-  border: 1px solid #1b1b1b;
-  background-color: var(--grey);
+  padding: 6px 10px;
+  border-radius: 5px;
+  background-color: var(--ligth-dark);
+  font-size: 18px;
+}
+
+.MoviesPageBtn:hover {
+  background-color: var(--dark-blue);
 }

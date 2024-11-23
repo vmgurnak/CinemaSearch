@@ -3,15 +3,13 @@
 }
 
 .MovieCastList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  column-gap: 10px;
-  row-gap: 20px;
+  display: grid;
+  row-gap: 30px;
+  column-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
 .MovieCastItem {
-  width: 239px;
   padding-bottom: 10px;
   box-shadow: 0 1px 6px var(--grey), 0 1px 1px var(--grey),
     0 2px 1px var(--grey);

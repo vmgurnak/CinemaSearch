@@ -20,9 +20,9 @@
 }
 
 .link:hover {
-  color: var(--red);
+  color: var(--orange);
 }
 
 .active {
-  border-bottom: 3px solid var(--red);
+  border-bottom: 3px solid var(--orange);
 }

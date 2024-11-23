@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: var(--light-gray);
+  background-color: var(--grey);
 }
 
 .errorMessageText {

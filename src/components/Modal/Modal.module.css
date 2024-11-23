@@ -32,7 +32,7 @@
   position: relative;
   width: 85%;
   height: 85%;
-  background-color: var(--light-gray);
+  background-color: var(--grey);
   border-radius: 10px;
   padding: 20px;
 }

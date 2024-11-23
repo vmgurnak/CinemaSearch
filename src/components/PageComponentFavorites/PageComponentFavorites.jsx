@@ -1,75 +1,42 @@
 import { useEffect, useState } from 'react';
 
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import MovieListFavorites from '../../components/MovieListFavorites/MovieListFavorites';
 import Button from '../Button/Button.jsx';
 
-import { requestGenres } from '../../services/api';
-
 import css from './PageComponentFavorites.module.css';
-import Loader from '../Loader/Loader.jsx';
 
-const PageComponent = ({ requestMovie, titlePage }) => {
+const PageComponentFavorites = ({ titlePage }) => {
+  const [items, setItems] = useState(4);
   const [movieList, setMovieList] = useState([]);
-  const [genres, setGenres] = useState([]);
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoadMoreBtn, setIsLoadMoreBtn] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    async function fetchGenres() {
-      try {
-        setIsError(false);
-        const dataGenres = await requestGenres();
-        console.log(dataGenres);
-        setGenres(dataGenres.genres);
-      } catch (err) {
-        setIsError(true);
-        setGenres([]);
-      }
+    const savedMovies = window.localStorage.getItem('favoriteMovies');
+    if (savedMovies) {
+      setMovieList(JSON.parse(savedMovies));
     }
-    fetchGenres();
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsError(false);
-        setIsLoading(true);
-        const data = await requestMovie(currentPage);
-        setMovieList((prevMovies) => [...prevMovies, ...data.results]);
-        setIsLoadMoreBtn(data.total_pages && data.total_pages !== currentPage);
-      } catch (err) {
-        setIsError(true);
-        setMovieList([]);
-      } finally {
-        setIsLoading(false);
-      }
-    }
+  const showMovies = movieList.slice(0, items);
+  const quantityMovies = movieList.length;
 
-    fetchData();
-  }, [currentPage, requestMovie]);
-
-  const handleClick = () => {
-    setCurrentPage((prevState) => prevState + 1);
+  const loadMore = () => {
+    setItems(items + 4);
   };
 
   return (
     <div className={css.pageWrap}>
       <h2 className={css.pageTitle}>{titlePage}</h2>
-      {isError && <ErrorMessage />}
-      {Array.isArray(movieList) && movieList.length > 0 && (
-        <MovieListFavorites
-          movieList={movieList}
-          genres={genres}
-          addClass={css.movieList}
-        />
+      {movieList.length === 0 && (
+        <p className={css.textError}>There are no favorite movies</p>
       )}
-      {isLoading && <Loader />}
-      {isLoadMoreBtn && <Button handleClick={handleClick} title="Load more" />}
+      {Array.isArray(movieList) && movieList.length > 0 && (
+        <MovieListFavorites movieList={showMovies} addClass={css.movieList} />
+      )}
+      {quantityMovies > items && (
+        <Button handleClick={loadMore} title="Load more" />
+      )}
     </div>
   );
 };
 
-export default PageComponent;
+export default PageComponentFavorites;

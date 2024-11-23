@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { Formik, Form, Field } from 'formik';
 
 import css from './SearchForm.module.css';
+import Button from '../Button/Button.jsx';
 
 const SearchForm = ({ onSetSearchParams, searchQuery }) => {
   const initialValues = { query: searchQuery ?? '' };
@@ -22,10 +23,13 @@ const SearchForm = ({ onSetSearchParams, searchQuery }) => {
   return (
     <Formik initialValues={initialValues} onSubmit={handlerSubmit}>
       <Form className={css.MoviesPageForm} autoComplete="off">
-        <Field className={css.MoviesPageInput} name="query" type="text" />
-        <button className={css.MoviesPageBtn} type="submit">
-          Search
-        </button>
+        <Field
+          className={css.MoviesPageInput}
+          name="query"
+          type="text"
+          placeholder="Search movies"
+        />
+        <Button title="Search" addClass={css.MoviesPageBtn} />
       </Form>
     </Formik>
   );

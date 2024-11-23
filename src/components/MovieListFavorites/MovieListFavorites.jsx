@@ -3,9 +3,9 @@ import { format } from 'date-fns';
 
 import clsx from 'clsx';
 
-import css from './MovieLisFavorites.module.css';
+import css from './MovieListFavorites.module.css';
 
-const MovieListFavorites = ({ movieList, genres, addClass }) => {
+const MovieListFavorites = ({ movieList, addClass }) => {
   const location = useLocation();
 
   return (
@@ -18,7 +18,7 @@ const MovieListFavorites = ({ movieList, genres, addClass }) => {
           release_date,
           poster_path,
           name,
-          genre_ids,
+          genres,
         }) => {
           return (
             <>
@@ -47,11 +47,7 @@ const MovieListFavorites = ({ movieList, genres, addClass }) => {
                       </div>
                       <div className={css.MovieGenresWrap}>
                         <span className={css.MovieGenres}>
-                          {genres
-                            .filter((genre) => genre_ids.includes(genre.id))
-                            .map((genre) => genre.name)
-                            .join(', ')}
-                          {/* {genre_ids.map((genre) => genre).join(', ')} */}
+                          {genres.map((genre) => genre.name).join(', ')}
                         </span>
                         <span className={css.MovieRating}>
                           {vote_average.toFixed(1)}

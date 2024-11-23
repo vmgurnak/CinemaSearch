@@ -24,6 +24,11 @@ const FavoritesPage = lazy(() =>
   import('./pages/FavoritesPage/FavoritesPage.jsx')
 );
 
+const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'));
+const MovieReviews = lazy(() =>
+  import('./components/MovieReviews/MovieReviews')
+);
+
 import Layout from './components/Layout/Layout.jsx';
 
 function App() {
@@ -35,9 +40,12 @@ function App() {
         <Route path="/popular" element={<PopularMoviesPage />} />
         <Route path="/upcoming" element={<UpcomingMoviesPage />} />
         <Route path="/search" element={<SearchMoviesPage />} />
-        <Route path="/movies/:movieId/*" element={<MovieDetailsPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="*" element={<TrendingPage />} />
+        <Route path="/movies/:movieId/*" element={<MovieDetailsPage />}>
+          <Route path="cast" element={<MovieCast />} />
+          <Route path="reviews" element={<MovieReviews />} />
+        </Route>
       </Routes>
     </Layout>
   );
