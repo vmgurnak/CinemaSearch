@@ -1,14 +1,20 @@
 import { format } from 'date-fns';
 
-import { useEffect, useState, useRef } from 'react';
-import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
+import { useEffect, useState, useRef, Suspense, lazy } from 'react';
+import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
 
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { MdFavoriteBorder } from 'react-icons/md';
 
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import Loader from '../../components/Loader/Loader';
 import Button from '../../components/Button/Button.jsx';
 import ModalTrailer from '../../components/ModalTrailer/ModalTrailer.jsx';
+
+const MovieCast = lazy(() => import('../../components/MovieCast/MovieCast'));
+const MovieReviews = lazy(() =>
+  import('../../components/MovieReviews/MovieReviews')
+);
 
 import { requestMovieById } from '../../services/api';
 import { timeConversion } from '../../services/timeConversion';
@@ -177,11 +183,16 @@ const MovieDetailsPage = () => {
               </ul>
             </div>
           </section>
-          <section>
-            <Outlet />
-          </section>{' '}
         </>
       )}
+      <section>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+          </Routes>
+        </Suspense>
+      </section>
       {isModalOpen && (
         <Modal
           onClose={handleCloseModal}
