@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* gap: 40px; */
 
   position: fixed;
   top: 0;
@@ -10,7 +11,8 @@
   height: 100vh;
   overflow-y: auto;
 
-  padding: 40px 35px;
+  /* padding: 40px 35px; */
+  padding: 100px 35px 60px 35px;
   z-index: 999;
 
   background-color: var(--dark-grey);
@@ -38,4 +40,12 @@
   position: absolute;
   top: 32px;
   right: 25px;
+}
+
+.languageSwitcherWrap {
+  margin-top: auto;
+}
+
+.languageSwitcherWrap .languageSwitcherBtn {
+  font-size: 22px;
 }

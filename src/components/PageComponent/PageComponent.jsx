@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import MovieList from '../../components/MovieList/MovieList';
@@ -16,6 +17,7 @@ const PageComponent = ({ requestMovie, titlePage }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadMoreBtn, setIsLoadMoreBtn] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchGenres() {
@@ -63,11 +65,14 @@ const PageComponent = ({ requestMovie, titlePage }) => {
         <MovieList
           movieList={movieList}
           genres={genres}
+          currentPage={currentPage}
           addClass={css.movieList}
         />
       )}
       {isLoading && <Loader />}
-      {isLoadMoreBtn && <Button handleClick={handleClick} title="Load more" />}
+      {isLoadMoreBtn && (
+        <Button handleClick={handleClick} title={t('loadMore')} />
+      )}
     </div>
   );
 };

@@ -1,12 +1,29 @@
-import { Link, useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
-
 import clsx from 'clsx';
+
+import { Link, useLocation } from 'react-router-dom';
+import { useRef, useEffect } from 'react';
 
 import css from './MovieList.module.css';
 
-const MovieList = ({ movieList, genres, addClass }) => {
+const MovieList = ({ movieList, genres, currentPage, addClass }) => {
   const location = useLocation();
+  const scrollRef = useRef();
+  console.log(scrollRef.current);
+  const heightItem =
+    scrollRef.current && scrollRef.current.getBoundingClientRect().height;
+  console.log(heightItem);
+  console.log(currentPage);
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollBy({
+        top: currentPage > 1 ? (heightItem + 20) * 2 : 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }, 500);
+  }, [currentPage, heightItem]);
 
   return (
     <ul className={clsx(css.MovieList, addClass)}>
@@ -28,9 +45,9 @@ const MovieList = ({ movieList, genres, addClass }) => {
             genre_ids,
           }) => {
             return (
-              <>
+              <div key={id}>
                 {poster_path && (
-                  <li className={css.MovieItem} key={id}>
+                  <li className={css.MovieItem} ref={scrollRef}>
                     <Link
                       className={css.MovieLink}
                       to={`/movies/${id}`}
@@ -58,7 +75,6 @@ const MovieList = ({ movieList, genres, addClass }) => {
                               .filter((genre) => genre_ids.includes(genre.id))
                               .map((genre) => genre.name)
                               .join(', ')}
-                            {/* {genre_ids.map((genre) => genre).join(', ')} */}
                           </span>
                           <span className={css.MovieRating}>
                             {vote_average.toFixed(1)}
@@ -68,7 +84,7 @@ const MovieList = ({ movieList, genres, addClass }) => {
                     </Link>
                   </li>
                 )}
-              </>
+              </div>
             );
           }
         )}

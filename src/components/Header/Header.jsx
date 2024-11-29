@@ -8,6 +8,7 @@ import Logo from '../REUSABLE/Logo/Logo.jsx';
 import css from './Header.module.css';
 import MainMenu from '../MainMenu/MainMenu.jsx';
 import AddMenu from '../AddMenu/AddMenu.jsx';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher.jsx';
 
 const Header = () => {
   const { width } = useWindowSize();
@@ -32,9 +33,9 @@ const Header = () => {
           </>
         ) : (
           <>
-            {/* <Menu /> */}
             <MainMenu />
             <AddMenu />
+            <LanguageSwitcher addClass={css.languageSwitcherWrap} />
           </>
         )}
       </div>

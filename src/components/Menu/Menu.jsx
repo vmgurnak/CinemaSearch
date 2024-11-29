@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
 import css from './Menu.module.css';
@@ -7,25 +8,27 @@ const buildLinkClass = ({ isActive }) => {
   return clsx([css.link], isActive && css.active);
 };
 const Menu = ({ closeMenu }) => {
+  const { t } = useTranslation();
+
   return (
     <nav className={css.menuList}>
       <NavLink className={buildLinkClass} to="/" onClick={closeMenu}>
-        TRENDING
+        {t('trending')}
       </NavLink>
       <NavLink className={buildLinkClass} to="/toprated" onClick={closeMenu}>
-        TOPRATED
+        {t('toprated')}
       </NavLink>
       <NavLink className={buildLinkClass} to="/popular" onClick={closeMenu}>
-        POPULAR
+        {t('popular')}
       </NavLink>
       <NavLink className={buildLinkClass} to="/upcoming" onClick={closeMenu}>
-        UPCOMING
+        {t('upcoming')}
       </NavLink>
       <NavLink className={buildLinkClass} to="/search" onClick={closeMenu}>
-        SEARCH
+        {t('search')}
       </NavLink>
       <NavLink className={buildLinkClass} to="/favorites" onClick={closeMenu}>
-        FAVORITES
+        {t('favorites')}
       </NavLink>
     </nav>
   );

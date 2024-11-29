@@ -1,0 +1,15 @@
+.languageSwitcherWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.languageSwitcherBtn {
+  padding: 4px 4px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  border: 1px solid var(--white);
+}

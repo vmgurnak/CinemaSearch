@@ -1,4 +1,5 @@
 import toast, { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -6,14 +7,14 @@ import { useSearchParams } from 'react-router-dom';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Loader from '../../components/Loader/Loader';
 import MovieList from '../../components/MovieList/MovieList';
+import Button from '../../components/Button/Button.jsx';
 import SearchForm from '../../components/SearchForm/SearchForm';
 
 import { requestGenres, requestMovieByQuery } from '../../services/api';
 
 import css from './SearchMoviesPage.module.css';
-import Button from '../../components/Button/Button.jsx';
 
-const SearchMoviesPage = () => {
+const SearchMoviePages = () => {
   const [movieList, setMovieList] = useState([]);
   const [genres, setGenres] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +23,8 @@ const SearchMoviesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('query');
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchGenres() {
@@ -101,7 +104,9 @@ const SearchMoviesPage = () => {
           addClass={css.movieList}
         />
       )}
-      {isLoadMoreBtn && <Button handleClick={handleClick} title="Load more" />}
+      {isLoadMoreBtn && (
+        <Button handleClick={handleClick} title={t('loadMore')} />
+      )}
       <Toaster
         position="top-right"
         toastOptions={{
@@ -116,4 +121,4 @@ const SearchMoviesPage = () => {
   );
 };
 
-export default SearchMoviesPage;
+export default SearchMoviePages;

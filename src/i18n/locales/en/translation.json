@@ -1,0 +1,13 @@
+{
+  "language": "Language",
+  "search": "SEARCH",
+  "favorites": "FAVORITES",
+  "trending": "TRENDING",
+  "toprated": "TOPRATED",
+  "popular": "POPULAR",
+  "upcoming": "UPCOMING",
+  "loadMore": "Load more",
+  "trendingToday": "Trending today",
+  "topMovies": "Top movies",
+  "popularMovies": "Popular movies"
+}
