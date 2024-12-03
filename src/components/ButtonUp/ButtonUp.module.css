@@ -1,0 +1,54 @@
+.btn {
+  position: fixed;
+  right: 30px;
+  bottom: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--orange);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms var(--transition),
+    background-color 250ms var(--transition);
+
+  @media (min-width: 768px) {
+    width: 70px;
+    height: 70px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: var(--dark-orange);
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+
+  @media (min-width: 768px) {
+    width: 30px;
+    height: 30px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 40px;
+    height: 40px;
+  }
+}

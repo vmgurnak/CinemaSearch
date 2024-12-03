@@ -17,13 +17,24 @@ const PageComponent = ({ requestMovie, titlePage }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadMoreBtn, setIsLoadMoreBtn] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
+  // if (lang === 'uk') {
+  //   window.location.reload();
+  // }
+
+  useEffect(() => {
+    // window.location.reload();
+    setCurrentPage(1);
+    setMovieList([]);
+  }, [lang]);
 
   useEffect(() => {
     async function fetchGenres() {
       try {
         setIsError(false);
-        const dataGenres = await requestGenres();
+        const dataGenres = await requestGenres(lang);
         console.log(dataGenres);
         setGenres(dataGenres.genres);
       } catch (err) {
@@ -32,15 +43,19 @@ const PageComponent = ({ requestMovie, titlePage }) => {
       }
     }
     fetchGenres();
-  }, []);
+  }, [lang]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         setIsError(false);
         setIsLoading(true);
-        const data = await requestMovie(currentPage);
-        setMovieList((prevMovies) => [...prevMovies, ...data.results]);
+        const data = await requestMovie(currentPage, lang);
+        console.log(data);
+        setMovieList((prevMovies) =>
+          currentPage === 1 ? data.results : [...prevMovies, ...data.results]
+        );
+
         setIsLoadMoreBtn(data.total_pages && data.total_pages !== currentPage);
       } catch (err) {
         setIsError(true);
@@ -51,7 +66,7 @@ const PageComponent = ({ requestMovie, titlePage }) => {
     }
 
     fetchData();
-  }, [currentPage, requestMovie]);
+  }, [currentPage, requestMovie, lang]);
 
   const handleClick = () => {
     setCurrentPage((prevState) => prevState + 1);

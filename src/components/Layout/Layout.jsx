@@ -1,8 +1,10 @@
 import { Suspense } from 'react';
 import Footer from '../Footer/Footer.jsx';
 import Header from '../Header/Header.jsx';
-import css from './Layout.module.css';
+import ButtonUp from '../ButtonUp/ButtonUp.jsx';
 import Loader from '../Loader/Loader.jsx';
+
+import css from './Layout.module.css';
 
 const Layout = ({ children }) => {
   return (
@@ -12,6 +14,7 @@ const Layout = ({ children }) => {
         <Suspense fallback={<Loader />}>{children}</Suspense>
       </main>
       <Footer />
+      <ButtonUp />
     </div>
   );
 };

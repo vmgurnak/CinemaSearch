@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 import { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
@@ -29,8 +30,11 @@ const MovieDetailsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [afterOpen, setAfterOpen] = useState(false);
   const [beforeClose, setBeforeClose] = useState(false);
-
   const [isError, setIsError] = useState(false);
+
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
   const location = useLocation();
   const backLinkRef = useRef(location.state ?? '/movies');
   const [isFavorite, setIsFavorite] = useState(() => {
@@ -90,7 +94,7 @@ const MovieDetailsPage = () => {
     async function fetchDataId() {
       try {
         setIsError(false);
-        const data = await requestMovieById(movieId);
+        const data = await requestMovieById(movieId, lang);
         console.log(data);
         setMovieData(data);
       } catch (err) {
@@ -99,7 +103,7 @@ const MovieDetailsPage = () => {
       }
     }
     fetchDataId();
-  }, [movieId]);
+  }, [movieId, lang]);
 
   return (
     <div className={css.pageWrap}>
@@ -110,7 +114,7 @@ const MovieDetailsPage = () => {
             <div>
               <div className={css.GoBackWrap}>
                 <Link className={css.GoBackLink} to={backLinkRef.current}>
-                  Go back
+                  {t('goBackBtn')}
                 </Link>
                 <FaArrowLeftLong className={css.GoBackIcon} size="16" />
               </div>
@@ -134,50 +138,63 @@ const MovieDetailsPage = () => {
                     />
                   </div>
                   <p className={css.MovieCont}>
-                    <span className={css.MovieContTitle}>Release Date: </span>
+                    <span className={css.MovieContTitle}>
+                      {t('releaseDate')}:{' '}
+                    </span>
                     {format(new Date(movieData.release_date), 'dd MMMM yyyy')}
                   </p>
                   {movieData.revenue !== 0 && (
                     <p className={css.MovieCont}>
-                      <span className={css.MovieContTitle}>Revenue: </span>
-                      {new Intl.NumberFormat('en-US').format(
-                        movieData.revenue
-                      )}{' '}
+                      <span className={css.MovieContTitle}>
+                        {t('revenue')}:{' '}
+                      </span>
+                      {new Intl.NumberFormat('en-US').format(movieData.revenue)}{' '}
                       $
                     </p>
                   )}
                   <p className={css.MovieCont}>
-                    <span className={css.MovieContTitle}>User Score: </span>
+                    <span className={css.MovieContTitle}>
+                      {t('userScore')}:{' '}
+                    </span>
                     {movieData.vote_average.toFixed(1)}
                   </p>
                   <p className={css.MovieCont}>
-                    <span className={css.MovieContTitle}>Genres: </span>
-                    {movieData.genres.map(({ name }) => name).join(' ')}
+                    <span className={css.MovieContTitle}>{t('genres')}: </span>
+                    {movieData.genres.map(({ name }) => name).join(', ')}
                   </p>
                   <p className={css.MovieCont}>
-                    <span className={css.MovieContTitle}>Duration: </span>
+                    <span className={css.MovieContTitle}>
+                      {t('duration')}:{' '}
+                    </span>
                     {timeConversion(movieData.runtime)}
                   </p>
+                  {movieData.overview && (
+                    <>
+                      <h3 className={css.OverviewTitle}>{t('overview')}</h3>
+                      <p className={css.OverviewCont}>{movieData.overview}</p>
+                    </>
+                  )}
 
-                  <h3 className={css.OverviewTitle}>Overview</h3>
-                  <p className={css.OverviewCont}>{movieData.overview}</p>
-                  <Button handleClick={handleOpenModal} title="Watch Trailer" />
+                  <Button
+                    handleClick={handleOpenModal}
+                    title={t('watchTrailer')}
+                  />
                 </div>
               </div>
             </div>
           </section>
           <section className={css.AddInfoSection}>
             <div className={css.AddInfoWrap}>
-              <h4 className={css.AddInfoTitle}>Additional information</h4>
+              <h4 className={css.AddInfoTitle}>{t('addInfo')}</h4>
               <ul className={css.AddInfoList}>
                 <li className={css.AddInfoItem}>
                   <Link to="cast" className={css.AddInfoLink}>
-                    Cast
+                    {t('cast')}
                   </Link>
                 </li>
                 <li className={css.AddInfoItem}>
                   <Link to="reviews" className={css.AddInfoLink}>
-                    Reviews
+                    {t('reviews')}
                   </Link>
                 </li>
               </ul>

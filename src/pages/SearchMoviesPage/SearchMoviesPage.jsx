@@ -24,13 +24,14 @@ const SearchMoviePages = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('query');
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
 
   useEffect(() => {
     async function fetchGenres() {
       try {
         setIsError(false);
-        const dataGenres = await requestGenres();
+        const dataGenres = await requestGenres(lang);
         console.log(dataGenres);
         setGenres(dataGenres.genres);
       } catch (err) {
@@ -39,7 +40,7 @@ const SearchMoviePages = () => {
       }
     }
     fetchGenres();
-  }, []);
+  }, [lang]);
 
   useEffect(() => {
     if (searchQuery === null) {
@@ -52,7 +53,7 @@ const SearchMoviePages = () => {
       try {
         setIsError(false);
         setIsLoading(true);
-        const data = await requestMovieByQuery(currentPage, searchQuery);
+        const data = await requestMovieByQuery(currentPage, searchQuery, lang);
         console.log(data);
         if (data.results.length === 0) {
           toast(
@@ -73,13 +74,12 @@ const SearchMoviePages = () => {
     }
 
     fetchDataByQuery();
-  }, [searchQuery, currentPage]);
+  }, [searchQuery, currentPage, lang]);
 
   const handleClick = () => {
     setCurrentPage((prevState) => prevState + 1);
   };
 
-  // callback function for handlerSubmit SearchForm
   const onSetSearchParams = (query) => {
     if (query === searchQuery) {
       return;
@@ -90,7 +90,7 @@ const SearchMoviePages = () => {
 
   return (
     <div className={css.MoviesPageWrap}>
-      <h2 className={css.pageTitle}>Find your favorite movie</h2>
+      <h2 className={css.pageTitle}>{t('findFavoriteMovie')}</h2>
       <SearchForm
         onSetSearchParams={onSetSearchParams}
         searchQuery={searchQuery}

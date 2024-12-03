@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,12 +13,15 @@ const MovieCast = () => {
   const [movieCast, setMovieCast] = useState(null);
   const [isError, setIsError] = useState(false);
 
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
   useEffect(() => {
     if (!movieId) return;
     async function fetchDataCast() {
       try {
         setIsError(false);
-        const data = await requestMovieByCast(movieId);
+        const data = await requestMovieByCast(movieId, lang);
 
         setMovieCast(data.cast);
       } catch (err) {
@@ -26,7 +31,7 @@ const MovieCast = () => {
     }
 
     fetchDataCast();
-  }, [movieId]);
+  }, [movieId, lang]);
 
   return (
     <div className={css.MovieCastWrap}>
@@ -46,7 +51,7 @@ const MovieCast = () => {
                       />
                       <p className={css.MovieCastName}>{name}</p>
                       <p className={css.MovieCastChar}>
-                        Character: {character}
+                        {t('character')}: {character}
                       </p>
                     </li>
                   </div>

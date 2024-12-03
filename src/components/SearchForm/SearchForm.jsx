@@ -1,13 +1,12 @@
-// import toast library for notification when the form is empty
 import toast from 'react-hot-toast';
-
-// import library Formik
 import { Formik, Form, Field } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import css from './SearchForm.module.css';
 import Button from '../Button/Button.jsx';
 
 const SearchForm = ({ onSetSearchParams, searchQuery }) => {
+  const { t } = useTranslation();
   const initialValues = { query: searchQuery ?? '' };
   // const initialValues = { query: '' };
 
@@ -27,9 +26,9 @@ const SearchForm = ({ onSetSearchParams, searchQuery }) => {
           className={css.MoviesPageInput}
           name="query"
           type="text"
-          placeholder="Search movies"
+          placeholder={t('searchPlaceholder')}
         />
-        <Button title="Search" addClass={css.MoviesPageBtn} />
+        <Button title={t('searchButton')} addClass={css.MoviesPageBtn} />
       </Form>
     </Formik>
   );

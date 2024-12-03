@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -9,10 +11,13 @@ const ModalTrailer = ({ poster }) => {
   const { movieId } = useParams();
   const [trailers, setTrailers] = useState(null);
 
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { results } = await requestMovieByTrailer(movieId);
+        const { results } = await requestMovieByTrailer(movieId, lang);
         console.log(results);
 
         if (results && results.length === 0) {
@@ -28,7 +33,7 @@ const ModalTrailer = ({ poster }) => {
       }
     };
     fetchData();
-  }, [movieId]);
+  }, [movieId, lang]);
 
   return (
     <div className={css.modalTrailerWrap}>
@@ -45,9 +50,7 @@ const ModalTrailer = ({ poster }) => {
         />
       ) : (
         <>
-          <p className={css.errorMessageText}>
-            There is no trailer for this movie
-          </p>
+          <p className={css.errorMessageText}>{t('noTrailer')}</p>
           <img
             className={css.MovieImg}
             src={`https://image.tmdb.org/t/p/w500${poster}`}

@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,12 +13,15 @@ const MovieReviews = () => {
   const [movieReviews, setMovieReviews] = useState(null);
   const [isError, setIsError] = useState(false);
 
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
   useEffect(() => {
     if (!movieId) return;
     async function fetchDataReviews() {
       try {
         setIsError(false);
-        const data = await requestMovieByReviews(movieId);
+        const data = await requestMovieByReviews(movieId, lang);
         setMovieReviews(data.results);
       } catch (err) {
         setIsError(true);
@@ -24,7 +29,7 @@ const MovieReviews = () => {
       }
     }
     fetchDataReviews();
-  }, [movieId]);
+  }, [movieId, lang]);
 
   return (
     <div className={css.MovieReviewsWrap}>
@@ -34,7 +39,9 @@ const MovieReviews = () => {
           {movieReviews.map(({ id, author, content }) => {
             return (
               <li className={css.MovieReviewsItem} key={id}>
-                <p className={css.MovieReviewsAuthor}>Author: {author}</p>
+                <p className={css.MovieReviewsAuthor}>
+                  {t('author')}: {author}
+                </p>
                 <p className={css.MovieReviewsCont}>{content}</p>
               </li>
             );
@@ -42,9 +49,7 @@ const MovieReviews = () => {
         </ul>
       )}
       {movieReviews !== null && movieReviews.length === 0 && (
-        <p className={css.MovieReviewsNotif}>
-          We don&apos;t have any reviews for this movie
-        </p>
+        <p className={css.MovieReviewsNotif}>{t('noReviews')}</p>
       )}
     </div>
   );

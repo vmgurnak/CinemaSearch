@@ -9,11 +9,8 @@ import css from './MovieList.module.css';
 const MovieList = ({ movieList, genres, currentPage, addClass }) => {
   const location = useLocation();
   const scrollRef = useRef();
-  console.log(scrollRef.current);
   const heightItem =
     scrollRef.current && scrollRef.current.getBoundingClientRect().height;
-  console.log(heightItem);
-  console.log(currentPage);
 
   useEffect(() => {
     setTimeout(() => {
