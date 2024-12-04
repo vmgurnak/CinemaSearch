@@ -17,7 +17,7 @@
 }
 
 .link {
-  padding: 20px 0px;
+  padding: 10px 0px;
   color: var(--light-gray);
   transition: color var(--transition-delay) var(--transition);
 }

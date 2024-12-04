@@ -12,14 +12,22 @@ const LanguageSwitcher = ({ addClass, btnClass }) => {
   return (
     <div className={clsx(css.languageSwitcherWrap, addClass)}>
       <button
-        className={clsx(btnClass, css.languageSwitcherBtn)}
+        className={clsx(
+          btnClass,
+          css.languageSwitcherBtn,
+          i18n.language === LOCALS.EN && css.languageSwitcherBtnActive
+        )}
         disabled={i18n.language === LOCALS.EN}
         onClick={() => i18n.changeLanguage(LOCALS.EN)}
       >
         EN
       </button>
       <button
-        className={clsx(btnClass, css.languageSwitcherBtn)}
+        className={clsx(
+          btnClass,
+          css.languageSwitcherBtn,
+          i18n.language === LOCALS.UK && css.languageSwitcherBtnActive
+        )}
         disabled={i18n.language === LOCALS.UK}
         onClick={() => i18n.changeLanguage(LOCALS.UK)}
       >

@@ -20,12 +20,7 @@ const PageComponent = ({ requestMovie, titlePage }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
-  // if (lang === 'uk') {
-  //   window.location.reload();
-  // }
-
   useEffect(() => {
-    // window.location.reload();
     setCurrentPage(1);
     setMovieList([]);
   }, [lang]);
@@ -46,6 +41,36 @@ const PageComponent = ({ requestMovie, titlePage }) => {
   }, [lang]);
 
   useEffect(() => {
+    setTimeout(() => {
+      if (currentPage !== 1) {
+        return;
+      }
+    }, 100);
+
+    async function fetchData() {
+      try {
+        setIsError(false);
+        setIsLoading(true);
+        const data = await requestMovie(1, lang);
+        console.log(data);
+        setMovieList(data.results);
+
+        setIsLoadMoreBtn(data.total_pages && data.total_pages !== currentPage);
+      } catch (err) {
+        setIsError(true);
+        setMovieList([]);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [requestMovie, lang]);
+
+  useEffect(() => {
+    if (currentPage === 1) {
+      return;
+    }
     async function fetchData() {
       try {
         setIsError(false);
@@ -66,7 +91,7 @@ const PageComponent = ({ requestMovie, titlePage }) => {
     }
 
     fetchData();
-  }, [currentPage, requestMovie, lang]);
+  }, [currentPage, requestMovie]);
 
   const handleClick = () => {
     setCurrentPage((prevState) => prevState + 1);

@@ -13,3 +13,9 @@
   color: #fff;
   border: 1px solid var(--white);
 }
+
+.languageSwitcherBtnActive {
+  background-color: var(--white);
+  color: var(--dark);
+  font-weight: 600;
+}

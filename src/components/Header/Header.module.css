@@ -2,8 +2,7 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  flex-basis: 100px;
-  /* height: 100px; */
+  flex-basis: 120px;
 
   position: relative;
 
@@ -54,6 +53,7 @@
 .headerContainer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-grow: 1;
 
   /* outline: 1px solid white;
