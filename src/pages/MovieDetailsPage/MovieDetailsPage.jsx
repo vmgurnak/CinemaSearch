@@ -11,6 +11,7 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/Button/Button.jsx';
 import ModalTrailer from '../../components/ModalTrailer/ModalTrailer.jsx';
+import DocumentTitle from '../../components/REUSABLE/DocumentTitle.jsx';
 
 const MovieCast = lazy(() => import('../../components/MovieCast/MovieCast'));
 const MovieReviews = lazy(() =>
@@ -109,6 +110,7 @@ const MovieDetailsPage = () => {
     <div className={css.pageWrap}>
       {movieData !== null && (
         <>
+          <DocumentTitle>Movies - {movieData.title}</DocumentTitle>;
           <section className={css.MovieInfoSection}>
             {isError && <ErrorMessage />}
             <div>

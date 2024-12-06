@@ -9,6 +9,7 @@ import Loader from '../../components/Loader/Loader';
 import MovieList from '../../components/MovieList/MovieList';
 import Button from '../../components/Button/Button.jsx';
 import SearchForm from '../../components/SearchForm/SearchForm';
+import DocumentTitle from '../../components/REUSABLE/DocumentTitle.jsx';
 
 import { requestGenres, requestMovieByQuery } from '../../services/api';
 
@@ -134,6 +135,7 @@ const SearchMoviePages = () => {
 
   return (
     <div className={css.MoviesPageWrap}>
+      <DocumentTitle>Movies - Search movies</DocumentTitle>
       <h2 className={css.pageTitle}>{t('findFavoriteMovie')}</h2>
       <SearchForm
         onSetSearchParams={onSetSearchParams}

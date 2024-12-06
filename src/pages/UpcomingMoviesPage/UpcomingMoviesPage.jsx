@@ -1,16 +1,20 @@
 import { useTranslation } from 'react-i18next';
 
-import { requestUpcomingMovie } from '../../services/api';
-
 import PageComponent from '../../components/PageComponent/PageComponent.jsx';
+import DocumentTitle from '../../components/REUSABLE/DocumentTitle.jsx';
+
+import { requestUpcomingMovie } from '../../services/api';
 
 const UpcomingMoviesPage = () => {
   const { t } = useTranslation();
   return (
-    <PageComponent
-      requestMovie={requestUpcomingMovie}
-      titlePage={t('upcomingMovies')}
-    />
+    <>
+      <DocumentTitle>Movies - Upcoming</DocumentTitle>
+      <PageComponent
+        requestMovie={requestUpcomingMovie}
+        titlePage={t('upcomingMovies')}
+      />
+    </>
   );
 };
 
