@@ -148,6 +148,7 @@ const SearchMoviePages = () => {
           movieList={movieList}
           genres={genres}
           addClass={css.movieList}
+          currentPage={currentPage}
         />
       )}
       {isLoadMoreBtn && (

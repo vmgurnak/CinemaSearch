@@ -110,7 +110,7 @@ const MovieDetailsPage = () => {
     <div className={css.pageWrap}>
       {movieData !== null && (
         <>
-          <DocumentTitle>Movies - {movieData.title}</DocumentTitle>;
+          <DocumentTitle>Movies - {movieData.title}</DocumentTitle>
           <section className={css.MovieInfoSection}>
             {isError && <ErrorMessage />}
             <div>

@@ -16,7 +16,7 @@ const MovieListFavorites = ({ movieList, items, addClass }) => {
   useEffect(() => {
     setTimeout(() => {
       window.scrollBy({
-        top: items > 1 ? heightItem + 20 : 0,
+        top: items > 4 ? heightItem + 20 : 0,
         left: 0,
         behavior: 'smooth',
       });
