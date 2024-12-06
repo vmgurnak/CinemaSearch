@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 
@@ -5,8 +6,22 @@ import clsx from 'clsx';
 
 import css from './MovieListFavorites.module.css';
 
-const MovieListFavorites = ({ movieList, addClass }) => {
+const MovieListFavorites = ({ movieList, items, addClass }) => {
   const location = useLocation();
+
+  const scrollRef = useRef();
+  const heightItem =
+    scrollRef.current && scrollRef.current.getBoundingClientRect().height;
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollBy({
+        top: items > 1 ? heightItem + 20 : 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }, 500);
+  }, [items, heightItem]);
 
   return (
     <ul className={clsx(css.MovieList, addClass)}>
@@ -23,7 +38,7 @@ const MovieListFavorites = ({ movieList, addClass }) => {
           return (
             <>
               {poster_path && (
-                <li className={css.MovieItem} key={id}>
+                <li className={css.MovieItem} ref={scrollRef} key={id}>
                   <Link
                     className={css.MovieLink}
                     to={`/movies/${id}`}

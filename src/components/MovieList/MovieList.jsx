@@ -15,7 +15,7 @@ const MovieList = ({ movieList, genres, currentPage, addClass }) => {
   useEffect(() => {
     setTimeout(() => {
       window.scrollBy({
-        top: currentPage > 1 ? (heightItem + 20) * 2 : 0,
+        top: currentPage > 1 ? heightItem + 20 : 0,
         left: 0,
         behavior: 'smooth',
       });
@@ -42,9 +42,9 @@ const MovieList = ({ movieList, genres, currentPage, addClass }) => {
             genre_ids,
           }) => {
             return (
-              <div key={id}>
+              <>
                 {poster_path && (
-                  <li className={css.MovieItem} ref={scrollRef}>
+                  <li className={css.MovieItem} ref={scrollRef} key={id}>
                     <Link
                       className={css.MovieLink}
                       to={`/movies/${id}`}
@@ -81,7 +81,7 @@ const MovieList = ({ movieList, genres, currentPage, addClass }) => {
                     </Link>
                   </li>
                 )}
-              </div>
+              </>
             );
           }
         )}

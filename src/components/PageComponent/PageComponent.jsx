@@ -77,10 +77,7 @@ const PageComponent = ({ requestMovie, titlePage }) => {
         setIsLoading(true);
         const data = await requestMovie(currentPage, lang);
         console.log(data);
-        setMovieList((prevMovies) =>
-          currentPage === 1 ? data.results : [...prevMovies, ...data.results]
-        );
-
+        setMovieList((prevMovies) => [...prevMovies, ...data.results]);
         setIsLoadMoreBtn(data.total_pages && data.total_pages !== currentPage);
       } catch (err) {
         setIsError(true);

@@ -5,7 +5,11 @@ import css from './Button.module.css';
 const Button = ({ handleClick, title, addClass }) => {
   return (
     <div className={css.btnWrap}>
-      <button className={clsx(css.btn, addClass)} onClick={handleClick}>
+      <button
+        className={clsx(css.btn, addClass)}
+        onClick={handleClick}
+        type="submit"
+      >
         {title}
       </button>
     </div>

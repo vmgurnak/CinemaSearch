@@ -28,6 +28,11 @@ const SearchMoviePages = () => {
   const lang = i18n.language;
 
   useEffect(() => {
+    setCurrentPage(1);
+    setMovieList([]);
+  }, [lang]);
+
+  useEffect(() => {
     async function fetchGenres() {
       try {
         setIsError(false);
@@ -43,13 +48,52 @@ const SearchMoviePages = () => {
   }, [lang]);
 
   useEffect(() => {
-    if (searchQuery === null) {
+    if (!searchQuery) {
       return;
     }
-    async function fetchDataByQuery() {
-      if (!searchQuery) {
+
+    setTimeout(() => {
+      if (currentPage !== 1) {
         return;
       }
+    }, 100);
+    async function fetchDataByQuery() {
+      try {
+        setIsError(false);
+        setIsLoading(true);
+        const data = await requestMovieByQuery(1, searchQuery, lang);
+        console.log(data);
+        if (data.results.length === 0) {
+          toast(
+            'Sorry, there are no movies your search query. Please try again.'
+          );
+          setMovieList([]);
+          return;
+        } else {
+          setMovieList(data.results);
+        }
+        setIsLoadMoreBtn(data.total_pages && data.total_pages !== currentPage);
+      } catch (err) {
+        setIsError(true);
+        setMovieList([]);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchDataByQuery();
+  }, [searchQuery, lang]);
+
+  useEffect(() => {
+    if (!searchQuery) {
+      return;
+    }
+
+    if (currentPage === 1) {
+      return;
+    }
+
+    async function fetchDataByQuery() {
       try {
         setIsError(false);
         setIsLoading(true);
@@ -74,7 +118,7 @@ const SearchMoviePages = () => {
     }
 
     fetchDataByQuery();
-  }, [searchQuery, currentPage, lang]);
+  }, [searchQuery, currentPage]);
 
   const handleClick = () => {
     setCurrentPage((prevState) => prevState + 1);

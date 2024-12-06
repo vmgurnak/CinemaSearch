@@ -30,7 +30,11 @@ const PageComponentFavorites = ({ titlePage }) => {
         <p className={css.textError}>There are no favorite movies</p>
       )}
       {Array.isArray(movieList) && movieList.length > 0 && (
-        <MovieListFavorites movieList={showMovies} addClass={css.movieList} />
+        <MovieListFavorites
+          movieList={showMovies}
+          items={items}
+          addClass={css.movieList}
+        />
       )}
       {quantityMovies > items && (
         <Button handleClick={loadMore} title="Load more" />
