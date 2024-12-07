@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import CloseButton from '../REUSABLE/CloseButton/CloseButton.jsx';
 
