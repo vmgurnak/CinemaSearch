@@ -29,7 +29,6 @@ const Modal = ({ isModalOpen, afterOpen, beforeClose, onClose, children }) => {
     <div
       className={clsx(
         css.modalOverlay,
-        isModalOpen && css.modalOpen,
         afterOpen && css.afterOpen,
         beforeClose && css.beforeClose
       )}

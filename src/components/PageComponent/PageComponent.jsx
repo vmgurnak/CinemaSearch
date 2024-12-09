@@ -30,7 +30,6 @@ const PageComponent = ({ requestMovie, titlePage }) => {
       try {
         setIsError(false);
         const dataGenres = await requestGenres(lang);
-        console.log(dataGenres);
         setGenres(dataGenres.genres);
       } catch (err) {
         setIsError(true);
@@ -52,9 +51,7 @@ const PageComponent = ({ requestMovie, titlePage }) => {
         setIsError(false);
         setIsLoading(true);
         const data = await requestMovie(1, lang);
-        console.log(data);
         setMovieList(data.results);
-
         setIsLoadMoreBtn(data.total_pages && data.total_pages !== currentPage);
       } catch (err) {
         setIsError(true);

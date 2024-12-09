@@ -5,8 +5,6 @@ import clsx from 'clsx';
 import css from './Logo.module.css';
 
 const Logo = ({ addClass, onClick }) => {
-  // const { width } = useWindowSize();
-
   return (
     <Link className={clsx(css.logoWrap, addClass)} to="/" onClick={onClick}>
       <ImFilm className={css.logo} />

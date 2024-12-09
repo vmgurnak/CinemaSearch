@@ -55,22 +55,6 @@ const MovieDetailsPage = () => {
     return [];
   });
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-    setTimeout(() => {
-      setAfterOpen(true);
-    }, 500);
-  };
-
-  const handleCloseModal = () => {
-    setBeforeClose(true);
-    setAfterOpen(false);
-    setTimeout(() => {
-      setIsModalOpen(false);
-      setBeforeClose(false);
-    }, 500);
-  };
-
   useEffect(() => {
     window.localStorage.setItem(
       'favoriteMovies',
@@ -90,17 +74,32 @@ const MovieDetailsPage = () => {
     }
   };
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    setTimeout(() => {
+      setAfterOpen(true);
+    }, 500);
+  };
+
+  const handleCloseModal = () => {
+    setBeforeClose(true);
+    setAfterOpen(false);
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setBeforeClose(false);
+    }, 500);
+  };
+
   useEffect(() => {
     if (!movieId) return;
     async function fetchDataId() {
       try {
         setIsError(false);
         const data = await requestMovieById(movieId, lang);
-        console.log(data);
         setMovieData(data);
       } catch (err) {
         setIsError(true);
-        setMovieData({});
+        setMovieData(null);
       }
     }
     fetchDataId();

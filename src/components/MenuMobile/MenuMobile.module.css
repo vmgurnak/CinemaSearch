@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* gap: 40px; */
 
   position: fixed;
   top: 0;
@@ -11,7 +10,6 @@
   height: 100vh;
   overflow-y: auto;
 
-  /* padding: 40px 35px; */
   padding: 100px 35px 60px 35px;
   z-index: 999;
 
@@ -19,10 +17,6 @@
 
   transform: translateX(-100%);
   transition: transform var(--transition-delay) ease-in-out;
-
-  /* @media (min-width: 375px) {
-    width: 375px;
-  } */
 }
 
 .menuMobileOpen {

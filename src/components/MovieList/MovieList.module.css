@@ -1,10 +1,4 @@
 .MovieList {
-  /* display: flex;
-  flex-wrap: wrap;
-  row-gap: 30px;
-  column-gap: 15px;
-  justify-content: center; */
-
   display: grid;
   row-gap: 30px;
   column-gap: 15px;
@@ -12,7 +6,6 @@
 }
 
 .MovieItem {
-  /* width: 320px; */
   padding: 10px;
   border-radius: 8px;
 
@@ -20,18 +13,6 @@
     rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
 
   transition: box-shadow 250ms linear;
-
-  /* @media (min-width: 375px) {
-    width: 235px;
-  } */
-
-  /* @media (min-width: 768px) {
-    width: 235px;
-  } */
-
-  /* @media (min-width: 1440px) {
-    width: 330px;
-  } */
 }
 
 .MovieItem:hover {

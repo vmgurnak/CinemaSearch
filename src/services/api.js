@@ -119,7 +119,7 @@ export const requestMovieById = async (id, lang) => {
 
 // Credits
 // Get the cast and crew of a movie by ID.
-//api.themoviedb.org/3/movie/{movie_id}/credits
+//https://api.themoviedb.org/3/movie/{movie_id}/credits
 export const requestMovieByCast = async (id, lang) => {
   const BASE_URL = 'https://api.themoviedb.org/3/movie/';
   const config = {

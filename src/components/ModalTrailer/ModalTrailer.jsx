@@ -18,8 +18,6 @@ const ModalTrailer = ({ poster }) => {
     const fetchData = async () => {
       try {
         const { results } = await requestMovieByTrailer(movieId, lang);
-        console.log(results);
-
         if (results && results.length === 0) {
           return;
         }
@@ -27,7 +25,6 @@ const ModalTrailer = ({ poster }) => {
           (video) => video.type === 'Trailer'
         );
         setTrailers(trailerVideo);
-        console.log(trailerVideo);
       } catch (error) {
         console.error('ERROR', error);
       }
