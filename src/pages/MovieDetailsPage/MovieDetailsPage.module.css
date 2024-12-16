@@ -20,7 +20,8 @@
 
 .GoBackWrap {
   position: relative;
-  max-width: 100px;
+  display: inline-block;
+  /* max-width: 100px; */
   margin-bottom: 10px;
   background-color: var(--grey);
   border: 1px solid var(--dark-grey);
