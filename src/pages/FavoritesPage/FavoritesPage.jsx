@@ -6,8 +6,8 @@ const FavoritesPage = () => {
   const { t } = useTranslation();
   return (
     <>
-      <DocumentTitle>Movies - Favorites</DocumentTitle>;
-      <PageComponentFavorites titlePage={t('favoritesMovies')} />;
+      <DocumentTitle>Movies - Favorites</DocumentTitle>
+      <PageComponentFavorites titlePage={t('favoritesMovies')} />
     </>
   );
 };

@@ -27,6 +27,7 @@
 - MovieDetailsPage - page with additional information about the movie
 - Modal window for viewing the movie trailer
 - Mobile menu for screens up to 768 px
+- Interface languages ​​- English, Ukrainian
 
 # Layout
 
